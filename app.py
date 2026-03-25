@@ -8,11 +8,12 @@ import re
 # --- 1. CONFIGURACIÓN Y CONEXIÓN ---
 st.set_page_config(page_title="SARDTECH Cloud", page_icon="🚀", layout="wide")
 
-# Conexión Segura a Supabase
+# Conexión Segura a Supabase (USANDO SECRETOS DE STREAMLIT)
 @st.cache_resource
 def init_connection():
-    supabase_url = "https://ieaftdofkfxzzqndixny.supabase.co" 
-    supabase_key = "sb_publishable_7dPwiUr80fuf9vTAtBeMyQ_Wdv1UiDw"
+    # En lugar de escribir la clave aquí, Streamlit la leerá de su bóveda segura
+    supabase_url = st.secrets["SUPABASE_URL"]
+    supabase_key = st.secrets["SUPABASE_KEY"]
     return create_client(supabase_url, supabase_key)
 
 supabase = init_connection()
