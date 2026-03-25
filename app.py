@@ -10,9 +10,9 @@ st.set_page_config(page_title="SARDTECH Cloud", page_icon="🚀", layout="wide")
 
 # Conexión Segura a Supabase (usando Secrets de Streamlit)
 @st.cache_resource
-def alguna_funcion():
-supabase_url = "https://ieaftdofkfxzzqndixny.supabase.co"
-supabase_key = "sb_publishable_7dPwiUr80fuf9vTAtBeMyQ_Wdv1UiDw"
+def alguna_funcion():  
+    supabase_url = "https://ieaftdofkfxzzqndixny.supabase.co" 
+    supabase_key = "sb_publishable_7dPwiUr80fuf9vTAtBeMyQ_Wdv1UiDw"
     return create_client(url, key)
 
 supabase = init_connection()
