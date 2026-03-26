@@ -45,43 +45,49 @@ with tab2:
     st.subheader("Registro de Actividad")
     es_nueva = st.checkbox("➕ Prospecto Nuevo")
     
-    # Aquí aparecerá tu mensaje de éxito
     placeholder_mensaje = st.empty()
     
-    # LA MAGIA DE TU IDEA: clear_on_submit=True limpia los campos automáticamente
+    # clear_on_submit=True sigue aquí haciendo su magia
     with st.form("registro_form", clear_on_submit=True):
         col_a, col_b = st.columns(2)
         with col_a:
             lista_empresas = df_backlog['empresa'].tolist() if not df_backlog.empty else [""]
-            empresa = st.text_input("Empresa") if es_nueva else st.selectbox("Seleccionar Empresa", lista_empresas)
-            accion = st.selectbox("Acción", ["Llamada", "LinkedIn", "Demo", "Follow-up"])
-            resultado = st.selectbox("Estatus", ["Sin Respuesta", "Interés", "Cita Agendada (SQL)", "Rechazado"])
+            
+            # Agregamos index=None para que nazcan "vacíos"
+            empresa = st.text_input("Empresa") if es_nueva else st.selectbox("Seleccionar Empresa", lista_empresas, index=None, placeholder="Elige una empresa...")
+            accion = st.selectbox("Acción", ["Llamada", "LinkedIn", "Demo", "Follow-up"], index=None, placeholder="Elige una acción...")
+            resultado = st.selectbox("Estatus", ["Sin Respuesta", "Interés", "Cita Agendada (SQL)", "Rechazado"], index=None, placeholder="Elige el estatus...")
+        
         with col_b:
-            giro = st.selectbox("Giro", ["Fintech", "Banco", "Retail", "Otro"]) if es_nueva else ""
+            giro = st.selectbox("Giro", ["Fintech", "Banco", "Retail", "Otro"], index=None, placeholder="Elige el giro...") if es_nueva else ""
             notas = st.text_input("Notas")
             prox = st.date_input("Siguiente Contacto", value=datetime.date.today() + datetime.timedelta(days=2))
         
         guardar = st.form_submit_button("Guardar en Nube ☁️")
         
         if guardar:
-            giro_final = giro if es_nueva else (df_backlog[df_backlog['empresa']==empresa]['giro'].values[0] if not df_backlog.empty else "Otro")
-            data = {
-                "empresa": empresa,
-                "accion": accion,
-                "resultado": resultado,
-                "notas": notas,
-                "proximo_contacto": str(prox),
-                "autor_sdr": usuario,
-                "giro": giro_final
-            }
-            # Guardamos en la tabla logs que acabas de crear
-            supabase.table("logs").insert(data).execute()
-            
-            if es_nueva:
-                supabase.table("backlog").insert({"empresa": empresa, "giro": giro_final}).execute()
-            
-            # TU MENSAJE DE ÉXITO VISUAL
-            placeholder_mensaje.success(f"✅ ¡El registro de {empresa} se guardó con éxito!")
+            # Candado de seguridad: Evita guardar si los campos están vacíos
+            if not empresa or not accion or not resultado:
+                st.warning("⚠️ Por favor selecciona una Empresa, Acción y Estatus antes de guardar.")
+            else:
+                giro_final = giro if es_nueva else (df_backlog[df_backlog['empresa']==empresa]['giro'].values[0] if not df_backlog.empty else "Otro")
+                data = {
+                    "empresa": empresa,
+                    "accion": accion,
+                    "resultado": resultado,
+                    "notas": notas,
+                    "proximo_contacto": str(prox),
+                    "autor_sdr": usuario,
+                    "giro": giro_final
+                }
+                
+                supabase.table("logs").insert(data).execute()
+                
+                if es_nueva:
+                    supabase.table("backlog").insert({"empresa": empresa, "giro": giro_final}).execute()
+                
+                placeholder_mensaje.success(f"✅ ¡El registro de {empresa} se guardó con éxito!")
+                
 
 with tab3:
     st.subheader("Base Maestra")
