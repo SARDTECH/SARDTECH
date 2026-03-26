@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from supabase import create_client, Client
 import datetime
-import re
 
 # --- 1. CONFIGURACIÓN Y CONEXIÓN ---
 st.set_page_config(page_title="SARDTECH Cloud", page_icon="🚀", layout="wide")
@@ -30,7 +29,7 @@ def cargar_backlog():
         df['Tier'] = df['giro'].apply(asignar_tier)
     return df
 
-# --- 4. INTERFAZ ---
+# --- 4. INTERFAZ Y ENCABEZADO ---
 st.markdown('<div style="font-size:42px;font-weight:800;color:#0f3057;">🚀 SARDTECH CLOUD</div>', unsafe_allow_html=True)
 st.markdown('<div style="font-size:20px;color:#008891;">Inteligencia Comercial en Tiempo Real</div><hr>', unsafe_allow_html=True)
 
@@ -41,19 +40,58 @@ df_backlog = cargar_backlog()
 
 tab1, tab2, tab3 = st.tabs(["📊 Analytics", "🏃‍♂️ Operación", "🗄️ Backlog"])
 
+# ==========================================
+# PESTAÑA 1: ANALYTICS (DASHBOARD)
+# ==========================================
+with tab1:
+    st.subheader("📈 Dashboard de Resultados en Tiempo Real")
+    
+    # Consultar la tabla de 'logs' en Supabase
+    res_logs = supabase.table("logs").select("*").execute()
+    df_logs = pd.DataFrame(res_logs.data)
+    
+    if df_logs.empty:
+        st.info("📭 Aún no hay suficientes datos. ¡Ve a la pestaña 'Operación', registra un par de llamadas o demos y regresa aquí!")
+    else:
+        # Métricas Clave (KPIs)
+        total_interacciones = len(df_logs)
+        citas_sql = len(df_logs[df_logs['resultado'] == 'Cita Agendada (SQL)'])
+        tasa_exito = (citas_sql / total_interacciones) * 100 if total_interacciones > 0 else 0
+        
+        kpi1, kpi2, kpi3 = st.columns(3)
+        kpi1.metric("Total Interacciones", total_interacciones, "Llamadas, demos, etc.")
+        kpi2.metric("Citas Agendadas (SQL)", citas_sql, "Prospectos calificados")
+        kpi3.metric("Tasa de Éxito", f"{tasa_exito:.1f}%")
+        
+        st.divider()
+        
+        # Gráficas visuales
+        graf1, graf2 = st.columns(2)
+        
+        with graf1:
+            st.markdown("##### 👥 Productividad por SDR")
+            productividad = df_logs['autor_sdr'].value_counts()
+            st.bar_chart(productividad)
+            
+        with graf2:
+            st.markdown("##### 🎯 Estatus del Pipeline")
+            estatus = df_logs['resultado'].value_counts()
+            st.bar_chart(estatus)
+
+# ==========================================
+# PESTAÑA 2: OPERACIÓN (CAPTURA DE DATOS)
+# ==========================================
 with tab2:
     st.subheader("Registro de Actividad")
     es_nueva = st.checkbox("➕ Prospecto Nuevo")
     
     placeholder_mensaje = st.empty()
     
-    # clear_on_submit=True sigue aquí haciendo su magia
     with st.form("registro_form", clear_on_submit=True):
         col_a, col_b = st.columns(2)
         with col_a:
             lista_empresas = df_backlog['empresa'].tolist() if not df_backlog.empty else [""]
             
-            # Agregamos index=None para que nazcan "vacíos"
             empresa = st.text_input("Empresa") if es_nueva else st.selectbox("Seleccionar Empresa", lista_empresas, index=None, placeholder="Elige una empresa...")
             accion = st.selectbox("Acción", ["Llamada", "LinkedIn", "Demo", "Follow-up"], index=None, placeholder="Elige una acción...")
             resultado = st.selectbox("Estatus", ["Sin Respuesta", "Interés", "Cita Agendada (SQL)", "Rechazado"], index=None, placeholder="Elige el estatus...")
@@ -66,7 +104,6 @@ with tab2:
         guardar = st.form_submit_button("Guardar en Nube ☁️")
         
         if guardar:
-            # Candado de seguridad: Evita guardar si los campos están vacíos
             if not empresa or not accion or not resultado:
                 st.warning("⚠️ Por favor selecciona una Empresa, Acción y Estatus antes de guardar.")
             else:
@@ -81,19 +118,22 @@ with tab2:
                     "giro": giro_final
                 }
                 
+                # Guardar en logs
                 supabase.table("logs").insert(data).execute()
                 
+                # Guardar en backlog si es nueva
                 if es_nueva:
                     supabase.table("backlog").insert({"empresa": empresa, "giro": giro_final}).execute()
                 
                 placeholder_mensaje.success(f"✅ ¡El registro de {empresa} se guardó con éxito!")
-                
 
+# ==========================================
+# PESTAÑA 3: BACKLOG (BASE MAESTRA)
+# ==========================================
 with tab3:
     st.subheader("Base Maestra")
     busqueda = st.text_input("🔍 Buscar empresa en el Backlog:")
     df_mostrar = df_backlog.copy()
     if busqueda and not df_mostrar.empty:
-        # Buscador funcional para tu Excel gigante
         df_mostrar = df_mostrar[df_mostrar['empresa'].astype(str).str.contains(busqueda, case=False, na=False)]
     st.dataframe(df_mostrar, use_container_width=True)
