@@ -1,0 +1,201 @@
+{
+  "_meta": {
+    "descripcion": "Marco regulatorio de ciberseguridad y protección de datos aplicable a empresas en México.",
+    "fuentes_documentos_originales": [
+      "Investigacion-LFPDPPP.txt — documento cargado por SARD TECH (fuente académica UNAM)",
+      "alquicirasj-a1u3-dm.txt — ensayo NOM-151-SCFI-2016, Facultad de Derecho UNAM"
+    ],
+    "fuentes_oficiales": [
+      "LFPDPPP — Ley Federal de Protección de Datos Personales en Posesión de Particulares (DOF 5-Jul-2010)",
+      "Artículo 16 CPEUM — Derecho a la privacidad y datos personales",
+      "NOM-151-SCFI-2016 — Requisitos para conservación de mensajes de datos (cancela NOM-151-SCFI-2002)",
+      "CNBV Circular 4/2019 — Disposiciones de ciberseguridad entidades financieras",
+      "Ley Fintech — Ley para Regular las Instituciones de Tecnología Financiera (DOF 9-Mar-2018)",
+      "Código de Comercio — Artículos relativos a firma electrónica y mensajes de datos",
+      "CFF Artículo 30 y 84 — Obligaciones de conservación de documentación fiscal",
+      "INAI — Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales"
+    ],
+    "fecha_actualizacion": "2024"
+  },
+  "regulaciones": {
+    "LFPDPPP": {
+      "nombre_completo": "Ley Federal de Protección de Datos Personales en Posesión de Particulares",
+      "fecha_publicacion": "5 de julio de 2010, DOF",
+      "fundamento_constitucional": "Artículo 16 de la Constitución Política de los Estados Unidos Mexicanos — reconoce el derecho de los ciudadanos a acceder, rectificar y cancelar sus datos personales, así como oponerse a su uso.",
+      "aplica_a": "TODA empresa privada en México que maneje datos personales de clientes, empleados o terceros, sin importar tamaño o sector",
+      "principios_ley": [
+        "Artículo 2: Define conceptos clave — datos personales, titular, responsable del tratamiento",
+        "Artículo 6: Principios para el tratamiento — consentimiento del titular, finalidad legítima, calidad de los datos",
+        "Consentimiento expreso del titular para recopilar y usar datos personales",
+        "Limitación en recopilación a fines específicos y legítimos",
+        "Implementación de medidas de seguridad administrativas, físicas y técnicas",
+        "Derechos ARCO operativos: Acceso, Rectificación, Cancelación, Oposición"
+      ],
+      "obligaciones_principales": [
+        "Aviso de Privacidad publicado y accesible a titulares antes de la recolección de datos",
+        "Consentimiento explícito del titular — no basta con que el usuario continúe navegando",
+        "Medidas de seguridad administrativas, físicas y técnicas documentadas",
+        "Procedimiento ARCO funcional y respondido en 20 días hábiles",
+        "Notificación a INAI y a los titulares afectados en caso de brecha de seguridad",
+        "Transferencia de datos a terceros solo con consentimiento o contratos que garanticen protección equivalente",
+        "Conservación de datos solo mientras sea necesario para la finalidad declarada"
+      ],
+      "derechos_arco": {
+        "A": "Acceso — el titular puede solicitar qué datos tienes sobre él",
+        "R": "Rectificación — corrección de datos inexactos o incompletos",
+        "C": "Cancelación — eliminación de datos cuando ya no sean necesarios",
+        "O": "Oposición — el titular puede oponerse al tratamiento de sus datos en cualquier momento"
+      },
+      "sanciones": {
+        "multa_minima_dias_smg": 100,
+        "multa_maxima_dias_smg": 320000,
+        "multa_maxima_mxn_aprox": 19800000,
+        "sancion_datos_sensibles": "Las multas se DUPLICAN cuando la infracción involucra datos sensibles",
+        "sancion_penal": "Hasta 5 años de prisión por tratamiento ilícito de datos sensibles (salud, biometría, origen racial, preferencia sexual)",
+        "suspension": "Suspensión temporal o definitiva del tratamiento de datos",
+        "autoridad": "INAI — puede iniciar procedimientos de verificación de oficio sin denuncia previa"
+      },
+      "preguntas_auditoria_kira": [
+        "¿Tu empresa tiene un Aviso de Privacidad publicado y actualizado?",
+        "¿Tus clientes saben qué haces con sus datos personales y pueden solicitar su eliminación?",
+        "¿Tienen definido quién es el responsable de protección de datos en la empresa?"
+      ],
+      "riesgo_incumplimiento": "ALTO",
+      "nota_academica": "Según la investigación LFPDPPP cargada: 'La ley ha establecido sanciones y mecanismos de rendición de cuentas para garantizar el cumplimiento, contribuyendo a disuadir prácticas indebidas y proteger los derechos de los individuos.'"
+    },
+    "NOM_151": {
+      "nombre_completo": "NOM-151-SCFI-2016 — Requisitos para la conservación de mensajes de datos y digitalización de documentos",
+      "cancela": "NOM-151-SCFI-2002",
+      "organo_normativo": "Secretaría de Economía, Dirección General de Normatividad Mercantil",
+      "aplica_a": "Empresas que realicen transacciones, contratos o comunicaciones comerciales por medios electrónicos; empresas que digitalicen documentos físicos para conservación legal",
+      "psc_definicion": "Los Prestadores de Servicios de Certificación (PSC) son personas o instituciones públicas que prestan servicios de firmas electrónicas, certificados digitales, constancias de conservación de mensajes de datos, sellos digitales de tiempo y digitalización de documentos en soporte físico.",
+      "proceso_conservacion": [
+        "Participación de un PSC acreditado por la Secretaría de Economía",
+        "El PSC emite una constancia que permite verificar la integridad del documento original a lo largo del tiempo",
+        "Los sellos digitales de tiempo garantizan la inalterabilidad del documento",
+        "Integración con ERP, sistemas contables o gestores documentales para automatizar la obtención de constancias"
+      ],
+      "proceso_digitalizacion": [
+        "1. Definición de la información a digitalizar",
+        "2. Elección de un proveedor autorizado (PSC acreditado)",
+        "3. Definición de lotes de información",
+        "4. Digitalización de los documentos",
+        "5. Cotejo certificado por TLA (Tercero Legalmente Autorizado)",
+        "6. Acta electrónica",
+        "7. Plataforma de almacenamiento electrónico seguro"
+      ],
+      "tla": "El TLA (Tercero Legalmente Autorizado) realiza el cotejo certificado garantizando que las representaciones digitales son fiel reflejo del original — permite la destrucción legal del documento físico original.",
+      "obligaciones_principales": [
+        "Conservar mensajes de datos con integridad y autenticidad garantizada por PSC",
+        "Usar PSC acreditado ante la SE para sellos de tiempo",
+        "Contratos electrónicos y correos comerciales con constancia de conservación",
+        "CFDIs (facturas electrónicas) conservados conforme a CFF — mínimo 5 años (Art. 30 CFF)",
+        "Documentos comerciales — mínimo 10 años de conservación"
+      ],
+      "sanciones": {
+        "autoridad_principal": "Secretaría de Economía",
+        "sancion_suspension": "El PSC que no cumpla puede ser sancionado con suspensión temporal o definitiva de sus funciones, conforme a la Ley Federal de Procedimiento Administrativo",
+        "multa_sat_cff_84": "Hasta $800,000 MXN por no conservar documentación digital requerida",
+        "riesgo_fiscal": "Rechazo de deducciones y acreditamientos por documentación no válida ante el SAT",
+        "procedimiento": "Sanción previa garantía de audiencia, resolución fundada y motivada, tomando en cuenta gravedad y reincidencia"
+      },
+      "preguntas_auditoria_kira": [
+        "¿Tu empresa firma contratos o realiza transacciones por medios electrónicos?",
+        "¿Tienen respaldo de correos y contratos electrónicos por al menos 10 años con validez legal?",
+        "¿Sus CFDIs están conservados conforme a los requisitos del SAT?"
+      ],
+      "riesgo_incumplimiento": "MEDIO-ALTO",
+      "nota_academica": "Según el ensayo NOM-151 cargado: 'La digitalización de documentos debe realizarse de forma cuidadosa y con medidas de seguridad adecuadas, a fin de evitar el acceso no autorizado a la información y garantizar la integridad y autenticidad de los documentos digitalizados a lo largo del tiempo.'"
+    },
+    "SAT_efirma": {
+      "nombre_completo": "Obligaciones SAT — Seguridad de e.firma, CSD y buzón tributario",
+      "aplica_a": "Todos los contribuyentes personas morales y físicas con actividad empresarial en México",
+      "riesgo_critico": "La e.firma (antes FIEL) tiene el mismo valor legal que la firma autógrafa. Un atacante con acceso a tu e.firma puede emitir facturas a tu nombre, cancelar CFDIs, modificar datos fiscales y realizar trámites ante el SAT sin tu conocimiento.",
+      "obligaciones_principales": [
+        "Proteger la e.firma con almacenamiento seguro — acceso restringido y contraseña fuerte",
+        "No compartir certificados de sello digital (CSD) con terceros no autorizados",
+        "Conservar CFDIs emitidos y recibidos mínimo 5 años (Art. 30 CFF)",
+        "Reportar robo o extravío de e.firma al SAT inmediatamente",
+        "Acceso al buzón tributario debe estar protegido"
+      ],
+      "sanciones": {
+        "art_84_cff": "Multas de $1,650 a $65,780 MXN por incumplimiento de obligaciones digitales",
+        "responsabilidad_efirma": "El contribuyente es responsable de TODOS los actos realizados con su e.firma — sin excepción",
+        "fraude_fiscal": "Uso fraudulento de e.firma ajena constituye delito fiscal (Art. 109 CFF)"
+      },
+      "preguntas_auditoria_kira": [
+        "¿La e.firma y certificados del SAT están guardados de forma segura con acceso restringido?",
+        "¿Más de una persona tiene acceso a la e.firma del representante legal?"
+      ],
+      "riesgo_incumplimiento": "CRÍTICO"
+    },
+    "CNBV_fintech": {
+      "nombre_completo": "CNBV Circular 4/2019 + Ley Fintech — Ciberseguridad para entidades financieras reguladas",
+      "aplica_a": "Instituciones de crédito, Sofomes, Fintechs, Casas de Bolsa, Aseguradoras, Fondos de inversión regulados por CNBV, CNSF o Banxico",
+      "obligaciones_principales": [
+        "Programa formal de ciberseguridad con políticas documentadas y aprobadas por el Consejo",
+        "Análisis de riesgos de ciberseguridad al menos anual",
+        "Plan de respuesta a incidentes con notificación a CNBV en máximo 72 horas",
+        "Pruebas de penetración periódicas con reporte ejecutivo",
+        "MFA obligatorio para acceso a sistemas críticos",
+        "Cifrado de datos en tránsito y en reposo (AES-256 mínimo)",
+        "Monitoreo continuo de amenazas (SOC o equivalente)",
+        "Capacitación en ciberseguridad documentada para todo el personal"
+      ],
+      "sanciones": {
+        "multa_maxima": "Hasta el 0.2% del capital pagado por incumplimiento — puede representar millones de MXN",
+        "sancion_grave": "Revocación de autorización para operar",
+        "reputacional": "Publicación de sanciones en el Diario Oficial de la Federación",
+        "personal_directivo": "Responsabilidad personal de directores y funcionarios"
+      },
+      "preguntas_auditoria_kira": [
+        "¿Tu empresa está regulada por la CNBV, CNSF o es una Sofom o Fintech?",
+        "¿Tienen programa formal de ciberseguridad aprobado por el Consejo de Administración?"
+      ],
+      "riesgo_incumplimiento": "CRÍTICO para entidades reguladas"
+    },
+    "LFPDPPP_datos_sensibles": {
+      "nombre_completo": "Datos sensibles bajo LFPDPPP — Régimen especial con sanciones duplicadas",
+      "categorias_datos_sensibles": [
+        "Datos de salud (historial médico, diagnósticos, discapacidades, medicamentos)",
+        "Datos biométricos (huella dactilar, reconocimiento facial, iris, voz)",
+        "Origen racial o étnico",
+        "Estado migratorio",
+        "Creencias religiosas o filosóficas",
+        "Afiliación sindical o política",
+        "Opiniones políticas",
+        "Preferencia u orientación sexual"
+      ],
+      "obligaciones_adicionales": [
+        "Consentimiento expreso y por escrito del titular — no basta con click en web ni firma digital",
+        "No pueden tratarse sin consentimiento aunque el titular lo solicite verbalmente",
+        "Aviso de Privacidad específico para datos sensibles",
+        "Medidas de seguridad reforzadas respecto a datos ordinarios"
+      ],
+      "sanciones": {
+        "multa_maxima_mxn": 39600000,
+        "agravante": "Las multas de la LFPDPPP se DUPLICAN cuando involucran datos sensibles",
+        "sancion_penal": "Hasta 5 años de prisión por tratamiento ilícito de datos sensibles (Art. 67-68 LFPDPPP)",
+        "responsabilidad": "Responsabilidad personal del Responsable del Tratamiento y sus directivos"
+      },
+      "preguntas_auditoria_kira": [
+        "¿Tu empresa maneja datos de salud de clientes o empleados?",
+        "¿Usan biometría (huella, reconocimiento facial) para control de acceso o asistencia?",
+        "¿Tienen empleados o clientes migrantes cuyos datos estén en sus sistemas?"
+      ],
+      "riesgo_incumplimiento": "MUY ALTO"
+    }
+  },
+  "mapa_regulacion_por_giro": {
+    "financiero":              ["LFPDPPP", "CNBV_fintech", "NOM_151", "SAT_efirma"],
+    "salud":                   ["LFPDPPP", "LFPDPPP_datos_sensibles", "NOM_151", "SAT_efirma"],
+    "retail":                  ["LFPDPPP", "NOM_151", "SAT_efirma"],
+    "educacion":               ["LFPDPPP", "LFPDPPP_datos_sensibles", "NOM_151"],
+    "manufactura":             ["LFPDPPP", "NOM_151", "SAT_efirma"],
+    "servicios_profesionales": ["LFPDPPP", "NOM_151", "SAT_efirma"],
+    "logistica":               ["LFPDPPP", "NOM_151", "SAT_efirma"],
+    "tecnologia":              ["LFPDPPP", "NOM_151", "SAT_efirma"],
+    "gobierno":                ["LGTAIP", "NOM_151"],
+    "default":                 ["LFPDPPP", "NOM_151", "SAT_efirma"]
+  }
+}

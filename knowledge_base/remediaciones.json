@@ -1,0 +1,228 @@
+{
+  "_meta": {
+    "descripcion": "Acciones de remediación concretas por control CIS fallido. Cada remediación tiene costo estimado, tiempo de implementación y si SARD TECH la ofrece.",
+    "fuentes": ["CIS Controls v8 Implementation Guidance", "NIST SP 800-53 Rev 5", "Microsoft Security Best Practices 2024"],
+    "fecha": "2024"
+  },
+  "remediaciones": {
+    "CIS-4.4": {
+      "titulo": "Activar autenticación multifactor (MFA/2FA)",
+      "descripcion_problema": "Sin MFA, cualquier contraseña robada, adivinada o filtrada otorga acceso total a los sistemas de la empresa.",
+      "acciones": [
+        "Activar MFA en Google Workspace o Microsoft 365 (configuración en panel de administrador)",
+        "Instalar Microsoft Authenticator o Google Authenticator en teléfonos del equipo",
+        "Activar MFA en correo, VPN, ERP y cualquier sistema accesible por internet",
+        "Configurar MFA resistente a phishing (FIDO2/llaves físicas) para cuentas de administrador"
+      ],
+      "herramientas_gratuitas": ["Google Authenticator", "Microsoft Authenticator", "Authy", "MFA nativo de Google Workspace"],
+      "herramientas_enterprise": ["Duo Security", "Okta", "Microsoft Entra ID"],
+      "tiempo_implementacion": "2-4 horas",
+      "costo_estimado_mxn": 0,
+      "costo_enterprise_mxn_mes": 850,
+      "dificultad": "Baja",
+      "impacto_reduccion_riesgo_pct": 99,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "Microsoft Security Intelligence Report 2024: MFA bloquea 99.9% de ataques de cuentas"
+    },
+    "CIS-11.1": {
+      "titulo": "Implementar respaldos automáticos en la nube",
+      "descripcion_problema": "Sin backups automáticos verificados, un ransomware o fallo de hardware puede significar pérdida permanente de datos y cierre del negocio.",
+      "acciones": [
+        "Implementar backup automático diario con Google Workspace Vault o Microsoft 365 Backup",
+        "Configurar respaldo de archivos críticos en Backblaze B2 o AWS S3 con retención de 30 días",
+        "Establecer regla 3-2-1: 3 copias, 2 medios diferentes, 1 offsite",
+        "Programar prueba de restauración mensual y documentar resultado",
+        "Configurar alertas si el backup falla en ejecutarse"
+      ],
+      "herramientas_gratuitas": ["Google Drive (15GB)", "OneDrive (5GB)", "Duplicati (open source)"],
+      "herramientas_enterprise": ["Backblaze B2", "Veeam", "Acronis Cyber Protect", "AWS Backup"],
+      "tiempo_implementacion": "4-8 horas",
+      "costo_estimado_mxn_mes": 350,
+      "dificultad": "Baja-Media",
+      "impacto_reduccion_riesgo_pct": 85,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "Verizon DBIR 2024: empresas con backup recuperan en 4h vs 21 días sin backup"
+    },
+    "CIS-14.1": {
+      "titulo": "Programa de capacitación anti-phishing",
+      "descripcion_problema": "El 95% de las brechas involucran error humano. Un empleado sin entrenamiento es la vulnerabilidad más explotable.",
+      "acciones": [
+        "Implementar simulación de phishing mensual (envío de correos falsos controlados para medir respuesta del equipo)",
+        "Taller presencial o virtual de 2 horas sobre reconocimiento de phishing, BEC y vishing",
+        "Crear proceso claro: si ves algo raro, a quién reportas (no responder, no hacer clic, reportar a IT o encargado)",
+        "Establecer política de contraseñas con gestor corporativo",
+        "Capacitación específica sobre protección de la e.firma del SAT"
+      ],
+      "herramientas_gratuitas": ["Google Phishing Quiz", "KnowBe4 Free Tools", "Infosec IQ (versión free)"],
+      "herramientas_enterprise": ["KnowBe4", "Proofpoint Security Awareness", "Cofense PhishMe"],
+      "tiempo_implementacion": "Programa continuo — inicio en 1 semana",
+      "costo_estimado_mxn_mes": 0,
+      "costo_enterprise_mxn_mes": 120,
+      "dificultad": "Baja",
+      "impacto_reduccion_riesgo_pct": 70,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "Proofpoint State of the Phish 2024: capacitación reduce tasa de clic en phishing en 70%"
+    },
+    "CIS-7.3": {
+      "titulo": "Activar actualizaciones automáticas del sistema operativo",
+      "descripcion_problema": "El 60% de las brechas explotan vulnerabilidades con parche disponible. No actualizar es dejar la puerta abierta con llave puesta.",
+      "acciones": [
+        "Activar Windows Update automático en modo 'Descargar e instalar automáticamente'",
+        "En macOS: Ajustes del Sistema > General > Actualización de Software > Activar automáticas",
+        "Para gestión centralizada: Microsoft Intune o Group Policy para +10 equipos",
+        "Programar reinicios de actualización fuera de horario laboral (3:00 AM)",
+        "Verificar mensualmente que todos los equipos están actualizados"
+      ],
+      "herramientas_gratuitas": ["Windows Update (nativo)", "macOS Software Update (nativo)", "WSUS (Windows Server)"],
+      "herramientas_enterprise": ["Microsoft Intune", "ManageEngine Patch Manager", "Automox"],
+      "tiempo_implementacion": "1-2 horas",
+      "costo_estimado_mxn": 0,
+      "dificultad": "Muy baja",
+      "impacto_reduccion_riesgo_pct": 60,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "CISA Known Exploited Vulnerabilities: 60% de exploits activos tienen parche disponible hace +30 días"
+    },
+    "CIS-4.1": {
+      "titulo": "Proceso de baja de accesos al día de salida",
+      "descripcion_problema": "Cuentas de ex-empleados activas son credenciales legítimas en manos de personas sin autorización. Pueden usarse semanas después de la salida.",
+      "acciones": [
+        "Crear checklist de salida: deshabilitar correo, revocar VPN, eliminar de grupos de WhatsApp Business, cancelar accesos a sistemas",
+        "Configurar alerta automática de RH a IT cuando se registra una baja",
+        "Usar Google Workspace o Microsoft 365 Admin para suspender cuenta (no eliminar — conservar datos 30 días)",
+        "Revisar mensualmente listado de cuentas activas vs nómina actual",
+        "Documentar el proceso en política escrita firmada por dirección"
+      ],
+      "herramientas_gratuitas": ["Google Workspace Admin Console", "Microsoft 365 Admin Center", "Checklist manual"],
+      "herramientas_enterprise": ["Okta Lifecycle Management", "Microsoft Entra ID Governance"],
+      "tiempo_implementacion": "2-3 horas (crear proceso), luego 15 min por baja",
+      "costo_estimado_mxn": 0,
+      "dificultad": "Baja",
+      "impacto_reduccion_riesgo_pct": 75,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "Ponemon Institute 2024: 59% de ex-empleados retuvieron acceso a sistemas después de su salida"
+    },
+    "CIS-12.1": {
+      "titulo": "Cambiar contraseñas por defecto del router",
+      "descripcion_problema": "Los routers con contraseñas de fábrica son detectables en minutos por herramientas como Shodan. Es la vulnerabilidad más fácil de explotar.",
+      "acciones": [
+        "Acceder al panel del router (normalmente 192.168.1.1 o 192.168.0.1)",
+        "Cambiar contraseña de administrador a una de al menos 16 caracteres",
+        "Cambiar nombre de red Wi-Fi (SSID) para que no identifique la marca del equipo",
+        "Actualizar firmware del router a la versión más reciente",
+        "Deshabilitar WPS (Wi-Fi Protected Setup) — es vulnerable",
+        "Deshabilitar administración remota si no se usa"
+      ],
+      "herramientas_gratuitas": ["Panel web del router", "Bitwarden (gestor de contraseñas gratuito)"],
+      "tiempo_implementacion": "30-60 minutos",
+      "costo_estimado_mxn": 0,
+      "dificultad": "Baja",
+      "impacto_reduccion_riesgo_pct": 80,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "NIST: contraseñas por defecto en dispositivos de red son CWE-1392, vulnerabilidad de impacto crítico"
+    },
+    "CIS-12.3": {
+      "titulo": "Segmentación de red Wi-Fi",
+      "descripcion_problema": "Una red plana permite movimiento lateral sin obstáculos. Un dispositivo IoT comprometido puede acceder a servidores críticos.",
+      "acciones": [
+        "Crear red de invitados (Guest Network) separada en el router para visitas",
+        "Crear VLAN de IoT para impresoras, cámaras y dispositivos inteligentes",
+        "Configurar que la red de invitados NO pueda acceder a la red principal",
+        "Para +20 empleados: implementar switch gestionable con VLANs configuradas",
+        "Documentar qué dispositivos van en cada red"
+      ],
+      "herramientas_gratuitas": ["Función Guest Network nativa en la mayoría de routers modernos"],
+      "herramientas_enterprise": ["Cisco Meraki", "Ubiquiti UniFi", "Aruba Instant"],
+      "tiempo_implementacion": "1-3 horas",
+      "costo_estimado_mxn": 0,
+      "costo_enterprise_mxn": 8500,
+      "dificultad": "Baja-Media",
+      "impacto_reduccion_riesgo_pct": 65,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "SANS Institute: la segmentación de red reduce el impacto de una brecha en 65% al limitar el movimiento lateral"
+    },
+    "CIS-3.1": {
+      "titulo": "Inventario y clasificación de datos sensibles",
+      "descripcion_problema": "Sin saber qué datos tienes y dónde están, no puedes protegerlos. El INAI puede multar por incumplimiento de LFPDPPP sin que necesariamente haya habido una brecha.",
+      "acciones": [
+        "Realizar mapeo de datos: ¿qué información personal manejas? ¿dónde está guardada?",
+        "Clasificar datos por sensibilidad: pública, interna, confidencial, datos personales, datos sensibles LFPDPPP",
+        "Actualizar o crear Aviso de Privacidad conforme a lineamientos INAI",
+        "Definir política de retención: ¿por cuánto tiempo se conserva cada tipo de dato?",
+        "Crear procedimiento ARCO (Acceso, Rectificación, Cancelación, Oposición) para clientes"
+      ],
+      "herramientas_gratuitas": ["Plantillas INAI gratuitas en inai.org.mx", "Excel para inventario inicial"],
+      "herramientas_enterprise": ["OneTrust", "BigID", "Microsoft Purview"],
+      "tiempo_implementacion": "8-16 horas (proceso inicial), luego revisión anual",
+      "costo_estimado_mxn": 0,
+      "costo_consultoria_mxn": 15000,
+      "dificultad": "Media",
+      "impacto_reduccion_riesgo_pct": 70,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Protección Total",
+      "fuente_dato_impacto": "INAI 2024: 847 procedimientos de verificación iniciados, multas promedio de $2.1M MXN por empresa"
+    },
+    "CIS-10.1": {
+      "titulo": "Antivirus/EDR gestionado en todos los endpoints",
+      "descripcion_problema": "El antivirus nativo de Windows (Defender) es insuficiente para amenazas avanzadas. El 28% de brechas involucran malware.",
+      "acciones": [
+        "Instalar solución de protección endpoint (EPP/EDR) en TODAS las computadoras",
+        "Configurar actualizaciones automáticas de firmas cada 4 horas",
+        "Activar protección en tiempo real y análisis de comportamiento",
+        "Configurar alertas al administrador cuando se detecta amenaza",
+        "Para +10 equipos: usar consola centralizada de gestión"
+      ],
+      "herramientas_gratuitas": ["Microsoft Defender (incluido en Windows)", "Malwarebytes Free (escaneo manual)"],
+      "herramientas_recomendadas_pyme": ["Microsoft Defender for Business ($85 MXN/usuario/mes)", "Bitdefender GravityZone", "ESET Endpoint Security"],
+      "herramientas_enterprise": ["CrowdStrike Falcon", "SentinelOne", "Microsoft Defender for Endpoint P2"],
+      "tiempo_implementacion": "2-4 horas",
+      "costo_estimado_mxn_mes_usuario": 85,
+      "dificultad": "Baja",
+      "impacto_reduccion_riesgo_pct": 72,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Blindaje PyME",
+      "fuente_dato_impacto": "AV-TEST 2024: EDR detecta 99.7% de malware conocido vs 95.2% del antivirus tradicional"
+    },
+    "CIS-17.1": {
+      "titulo": "Plan de respuesta a incidentes básico",
+      "descripcion_problema": "Sin un plan, cuando ocurre un incidente el equipo entra en pánico, toma decisiones equivocadas y el daño se multiplica.",
+      "acciones": [
+        "Documentar: ¿quién es el responsable principal de ciberseguridad en la empresa?",
+        "Crear tarjeta de contactos de emergencia: proveedor de TI, abogado, banco, CONDUSEF",
+        "Definir los 5 pasos de respuesta: Detectar → Contener → Erradicar → Recuperar → Documentar",
+        "Simular un incidente de ransomware (tabletop exercise) con el equipo directivo",
+        "Para entidades reguladas: tener protocolo de notificación a CNBV/INAI en 72 horas"
+      ],
+      "herramientas_gratuitas": ["Plantilla IRP de CISA (cisa.gov)", "NIST Computer Security Incident Handling Guide SP 800-61"],
+      "tiempo_implementacion": "4-8 horas (crear plan), luego simulacro trimestral",
+      "costo_estimado_mxn": 0,
+      "costo_consultoria_mxn": 12000,
+      "dificultad": "Media",
+      "impacto_reduccion_riesgo_pct": 58,
+      "sard_tech_lo_implementa": true,
+      "incluido_en_plan": "Protección Total",
+      "fuente_dato_impacto": "IBM 2024: empresas con plan de respuesta reducen el costo de una brecha en 58% vs las que no lo tienen"
+    }
+  },
+  "gestor_contrasenas": {
+    "titulo": "Implementar gestor de contraseñas corporativo",
+    "descripcion": "Herramienta esencial que resuelve el 70% de los problemas de contraseñas débiles y reutilizadas.",
+    "opciones_gratuitas": [
+      {"nombre": "Bitwarden", "precio": "Gratuito (personal) / $40 USD/año (organizaciones)", "notas": "Open source, auditable, recomendado para PyMEs"}
+    ],
+    "opciones_enterprise": [
+      {"nombre": "1Password Business", "precio": "$8 USD/usuario/mes", "notas": "Mejor UX, integración con SSO"},
+      {"nombre": "Keeper Business", "precio": "$6 USD/usuario/mes", "notas": "Cumple con SOC2, ISO 27001"},
+      {"nombre": "Dashlane Business", "precio": "$8 USD/usuario/mes", "notas": "Incluye monitoreo de dark web"}
+    ],
+    "implementacion": "2-4 horas para configuración y migración inicial",
+    "sard_tech_lo_implementa": true,
+    "incluido_en_plan": "Blindaje PyME"
+  }
+}

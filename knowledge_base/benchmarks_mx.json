@@ -1,0 +1,169 @@
+{
+  "_meta": {
+    "descripcion": "Datos reales de costo de brechas y probabilidad de ataque por industria. Convertidos a MXN usando tipo de cambio promedio 2024 ($17.15 MXN/USD).",
+    "fuentes": [
+      "IBM Cost of a Data Breach Report 2024 — ibm.com/reports/data-breach",
+      "Verizon Data Breach Investigations Report 2024 — verizon.com/dbir",
+      "ENISA Threat Landscape 2024 — enisa.europa.eu",
+      "FBI Internet Crime Report 2023 — ic3.gov",
+      "Proofpoint State of the Phish 2024 — proofpoint.com",
+      "CONDUSEF Reportes de Fraude 2024 — condusef.gob.mx",
+      "CERT-MX / CERT-In Mexico 2023"
+    ],
+    "tipo_cambio_usd_mxn": 17.15,
+    "año_referencia": 2024
+  },
+  "por_industria": {
+    "financiero": {
+      "nombre_display": "Financiero / Fintech / Seguros",
+      "costo_brecha_usd": 6090000,
+      "costo_brecha_mxn": 104443500,
+      "probabilidad_ataque_12m": 72,
+      "tiempo_deteccion_dias": 168,
+      "tiempo_contencion_dias": 51,
+      "vector_ataque_principal": "Phishing + robo de credenciales (36%)",
+      "regulacion_aplicable_mx": ["CNBV Circular 4/2019", "LFPDPPP", "NOM-151", "Ley Fintech 2018"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "El sector financiero tiene el costo más alto por 13 años consecutivos según IBM"
+    },
+    "salud": {
+      "nombre_display": "Salud / Clínicas / Hospitales / Farmacias",
+      "costo_brecha_usd": 9770000,
+      "costo_brecha_mxn": 167555500,
+      "probabilidad_ataque_12m": 68,
+      "tiempo_deteccion_dias": 190,
+      "tiempo_contencion_dias": 64,
+      "vector_ataque_principal": "Ransomware (54%) + acceso no autorizado",
+      "regulacion_aplicable_mx": ["NOM-024-SSA3-2012", "LFPDPPP", "NOM-151", "Reglamento de la Ley General de Salud"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "Salud tiene el costo más alto de TODOS los sectores por 14 años consecutivos"
+    },
+    "retail": {
+      "nombre_display": "Retail / Comercio / E-commerce",
+      "costo_brecha_usd": 2960000,
+      "costo_brecha_mxn": 50764000,
+      "probabilidad_ataque_12m": 55,
+      "tiempo_deteccion_dias": 197,
+      "tiempo_contencion_dias": 70,
+      "vector_ataque_principal": "Web application attacks (46%) + skimming",
+      "regulacion_aplicable_mx": ["LFPDPPP", "PCI-DSS (si procesa tarjetas)", "NOM-151", "PROFECO"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "E-commerce es el subsector más atacado por fraude en tarjetas de crédito"
+    },
+    "manufactura": {
+      "nombre_display": "Manufactura / Industria / Maquiladora",
+      "costo_brecha_usd": 2100000,
+      "costo_brecha_mxn": 36015000,
+      "probabilidad_ataque_12m": 48,
+      "tiempo_deteccion_dias": 210,
+      "tiempo_contencion_dias": 73,
+      "vector_ataque_principal": "Ransomware (37%) + compromiso de proveedores",
+      "regulacion_aplicable_mx": ["LFPDPPP", "NOM-151", "SE normativas sectoriales"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "OT/IT convergence aumenta la superficie de ataque en manufactura conectada"
+    },
+    "educacion": {
+      "nombre_display": "Educación / Escuelas / Universidades",
+      "costo_brecha_usd": 3580000,
+      "costo_brecha_mxn": 61397000,
+      "probabilidad_ataque_12m": 62,
+      "tiempo_deteccion_dias": 233,
+      "tiempo_contencion_dias": 79,
+      "vector_ataque_principal": "Ransomware (80%) + phishing a personal",
+      "regulacion_aplicable_mx": ["LFPDPPP", "Lineamientos SEP", "NOM-151"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024 + Verizon DBIR 2024",
+      "nota": "Educación fue el sector más afectado por ransomware en Latinoamérica en 2023"
+    },
+    "logistica": {
+      "nombre_display": "Logística / Transporte / Distribución",
+      "costo_brecha_usd": 2400000,
+      "costo_brecha_mxn": 41160000,
+      "probabilidad_ataque_12m": 44,
+      "tiempo_deteccion_dias": 185,
+      "tiempo_contencion_dias": 62,
+      "vector_ataque_principal": "Ransomware (41%) + fraude en transferencias",
+      "regulacion_aplicable_mx": ["LFPDPPP", "NOM-151", "SCT regulaciones"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "Ataques a GPS y sistemas de tracking van en aumento en México"
+    },
+    "gobierno": {
+      "nombre_display": "Gobierno / Instituciones Públicas",
+      "costo_brecha_usd": 2600000,
+      "costo_brecha_mxn": 44590000,
+      "probabilidad_ataque_12m": 58,
+      "tiempo_deteccion_dias": 241,
+      "tiempo_contencion_dias": 88,
+      "vector_ataque_principal": "Espionaje (35%) + ransomware + hacktivismo",
+      "regulacion_aplicable_mx": ["LGTAIP", "LFPDPPP", "Acuerdo DOF 2021 CSIRT-MX"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "México fue el país más atacado en LATAM en 2023 con 14 mil millones de intentos (Fortinet)"
+    },
+    "servicios_profesionales": {
+      "nombre_display": "Servicios Profesionales / Consultoría / Despachos",
+      "costo_brecha_usd": 1800000,
+      "costo_brecha_mxn": 30870000,
+      "probabilidad_ataque_12m": 43,
+      "tiempo_deteccion_dias": 175,
+      "tiempo_contencion_dias": 58,
+      "vector_ataque_principal": "BEC / Email Compromise (48%) + phishing",
+      "regulacion_aplicable_mx": ["LFPDPPP", "NOM-151", "obligaciones IMSS/SAT"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "Despachos contables y jurídicos son objetivos de alto valor por la información de sus clientes"
+    },
+    "tecnologia": {
+      "nombre_display": "Tecnología / Software / SaaS / IT",
+      "costo_brecha_usd": 4880000,
+      "costo_brecha_mxn": 83692000,
+      "probabilidad_ataque_12m": 65,
+      "tiempo_deteccion_dias": 162,
+      "tiempo_contencion_dias": 49,
+      "vector_ataque_principal": "Supply chain attacks (29%) + vulnerabilidades en código",
+      "regulacion_aplicable_mx": ["LFPDPPP", "NOM-151", "Ley Federal de Telecomunicaciones"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024",
+      "nota": "El sector tech es objetivo por el efecto cascada: comprometer 1 proveedor afecta a cientos de clientes"
+    },
+    "default": {
+      "nombre_display": "PyME General / Sector no especificado",
+      "costo_brecha_usd": 2000000,
+      "costo_brecha_mxn": 34300000,
+      "probabilidad_ataque_12m": 45,
+      "tiempo_deteccion_dias": 204,
+      "tiempo_contencion_dias": 73,
+      "vector_ataque_principal": "Phishing (41%) + ransomware (24%)",
+      "regulacion_aplicable_mx": ["LFPDPPP", "NOM-151"],
+      "fuente_costo": "IBM Cost of a Data Breach 2024 — promedio global",
+      "nota": "Promedio global de IBM 2024. El costo real varía por tamaño de empresa y controles implementados"
+    }
+  },
+  "estadisticas_generales": {
+    "costo_promedio_global_usd": 4880000,
+    "costo_promedio_pyme_usd": 2000000,
+    "tiempo_promedio_deteccion_dias": 204,
+    "tiempo_promedio_contencion_dias": 73,
+    "pct_brechas_por_error_humano": 95,
+    "pct_brechas_por_phishing": 41,
+    "pct_brechas_involucran_terceros": 62,
+    "pct_pymes_cierran_6_meses": 40,
+    "reduccion_costo_con_ia_seguridad": 45,
+    "reduccion_riesgo_phishing_con_capacitacion": 70,
+    "reduccion_riesgo_con_mfa": 99.9,
+    "ataques_detectados_tarde_pct": 83,
+    "fuente": "IBM Cost of a Data Breach 2024 + Verizon DBIR 2024 + Proofpoint 2024"
+  },
+  "contexto_mexico": {
+    "posicion_latam_ataques": 1,
+    "intentos_ataque_2023_miles_millones": 14,
+    "crecimiento_ransomware_2023_pct": 30,
+    "sector_mas_atacado_mx": "Gobierno y Financiero",
+    "phishing_reportados_condusef_2023": 892000,
+    "fraude_digital_mxn_2023": 12400000000,
+    "fuente_mexico": "Fortinet Threat Intelligence 2024 + CONDUSEF 2024 + CERT-MX 2023"
+  },
+  "roi_plan_blindaje": {
+    "costo_mensual_mxn": 2500,
+    "costo_anual_mxn": 30000,
+    "costo_promedio_brecha_pyme_mxn": 34300000,
+    "ratio_proteccion_inversion": 1143,
+    "descripcion": "Por cada peso invertido en Blindaje PyME, evitas $1,143 en costo potencial de una brecha"
+  }
+}
