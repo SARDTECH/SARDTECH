@@ -1,5 +1,5 @@
 """
-app.py — SARD TECH · KIRA Bot v2.0
+app.py — SARD TECH · KIRA Bot v2.0 + Chiki Bot v1.0
 Columnas Supabase reales: id, rol, mensaje, creado_en, session_id
 + email_capturado, reporte_enviado (agregadas en el Paso 1)
 """
@@ -20,6 +20,10 @@ supabase: Client = create_client(
 )
 
 TABLA = "chats_sardtech"
+
+# ══════════════════════════════════════════════════════════════
+# KIRA SYSTEM PROMPT
+# ══════════════════════════════════════════════════════════════
 
 KIRA_SYSTEM_PROMPT = """Eres KIRA, la auditora de ciberseguridad con IA de SARD TECH. Tu misión es realizar un diagnóstico profesional de ciberseguridad basado en CIS Controls v8 IG1 y NIST CSF 2.0.
 
@@ -71,7 +75,51 @@ REGLAS CRÍTICAS
 SUSTENTO DEL REPORTE: CIS Controls v8 IG1 · NIST CSF 2.0 · LFPDPPP · NOM-151-SCFI-2016 · IBM Cost of Data Breach 2024 · Verizon DBIR 2024"""
 
 
-# ── Helpers ──────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════
+# CHIKI SYSTEM PROMPT
+# ══════════════════════════════════════════════════════════════
+
+CHIKI_SYSTEM_PROMPT = """Eres Chiki, asistente de Carnicería La Chiquita (Acamapichtli 66, Col. La Preciosa, Azcapotzalco, CDMX). Hablas español mexicano natural y directo.
+
+REGLA ANTI-ALUCINACIÓN: SOLO habla de productos del catálogo. Si no está → "Eso no lo manejo todavía, pregúntale a Raúl por WhatsApp."
+NUNCA inventes precios ni productos.
+
+ERRORES ORTOGRÁFICOS: Reconoce variaciones coloquiales:
+aumada/ahumda/umada→Chuleta Ahumada, bisteck/bistek/bisteak→Bistec, chambarete/chanbarete→Chambarete, chicharron/chicharón→Chicharrón, longanisa→Longaniza, cecina/cesina→Cecina, macisa/masiza→Maciza, moida/molda→Molida, pexuga/pachuga→Pechuga, arrachera/arracha→Arrachera, salmon→Salmón, tilapea→Tilapia
+Si suena parecido confirma: "¿Te refieres a [PRODUCTO]?"
+
+PRINCIPIOS:
+- Ve directo. Sin "¡Con gusto!". Sin frases de relleno.
+- Máximo 4 opciones a la vez.
+- Guía paso a paso: producto→corte→uso→cantidad→pickup o entrega.
+- Si pide mucho pregunta si es para restaurante o evento.
+
+HORARIOS: Lun-Sáb 7am-6pm · Dom 8am-6pm | TEL: 55 5884 9504
+
+CATÁLOGO RES(/kg): Bistec $250(delgado/grueso/aplanado/picado, bola/aguayón/magro), Puntas Filete $250(trozos/fajitas/enteras), Costilla Asar $260(gruesa/tablita/tira/rack), Falda Deshebrar $250, Maciza $250(cubos/trozos), Molida $210(normal/doble, comercial/magra/mixta), Retazo $185, Chambarete c/H $190(rodajas/trozos,tuétano), Chambarete Macizo $250, Aguja Norteña $195(steak/delgado/mariposa), Arrachera Marinada $250(entera/picada/fajitas).
+
+CATÁLOGO CERDO(/kg): Espaldilla $130, Bistec cerdo $130(aplanado/grueso/tiritas), Maciza cerdo $130, Molida cerdo $130, Pulpa $130, Cabeza Lomo $140(marmoleada), Espinazo $120, Manitas $65(mitades/enteras,crudas/cocidas), Codillo $75, Cabeza $65, Costilla Falda $140(cargada), Lomo c/H $140(chuletas gruesas/delgadas), Caña Lomo $150(entera/medallones/mechada), Longaniza $130, Chorizo $140(bolitas/suelto), Chorizo Argentino $185(fresco), Chistorra $140(espiral/trocitos), Tocino $168(rebanado/trozo,ahumado), Chuleta Ahumada $130(normal/gruesa), Chicharrón Prensado $130(trozo/picado), Chicharrón Esponjado $240, Chicharrón Carnudo $260, Manteca $60, Cecina Enchilada $150(rebanada/picada,Yecapixtla).
+
+CATÁLOGO POLLO(/kg): Pechuga $120(aplanada milanesa/fajitas/cubos/entera/mitades, sin piel/con piel/molida), Pierna y Muslo $55(cuarto/separados/deshuesado muslo, sin piel/con piel/con cortaditas).
+
+CATÁLOGO PESCADO: Tilapia $85/kg, Salmón $160 paquete 400g.
+
+ESPECIALIDADES (sin precio): Chimichurri, Queso Provolone, Arrachera Marinada, Chorizo Argentino, Cecina, Chistorra, Hamburguesas, Jamón → "Para precios pregúntale a Raúl directo."
+
+FLUJO PEDIDO:
+1. ¿Qué carne? (máx 4 opciones)
+2. ¿Corte/presentación? (máx 4 opciones del catálogo)
+3. ¿Uso/platillo? (si aplica)
+4. ¿Cuántos kg?
+5. ¿Recoges en tienda o entrega a domicilio?
+   - Tienda: confirma Acamapichtli 66, La Preciosa. ¿A qué hora?
+   - Domicilio: ¿En qué colonia?
+     * Azcapotzalco → confirma, Raúl contacta por WhatsApp.
+     * Fuera de Azcapotzalco → "Solo entregamos en Azcapotzalco. ¿Puedes pasar a Acamapichtli 66?"
+6. Resume pedido completo y di que confirmarán por WhatsApp al 55 5884 9504."""
+
+
+# ── Helpers KIRA ──────────────────────────────────────────────
 
 def extraer_email(texto: str) -> str | None:
     m = re.search(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", texto)
@@ -123,7 +171,7 @@ def reporte_ya_enviado(session_id: str) -> bool:
         return False
 
 
-# ── Ruta principal ────────────────────────────────────────────
+# ── Ruta KIRA ─────────────────────────────────────────────────
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -137,13 +185,9 @@ def chat():
     if not mensaje:
         return jsonify({"error": "Mensaje vacío"}), 400
 
-    # 1. Historial de Supabase
     historial = obtener_historial(session_id)
-
-    # 2. Guardar mensaje del usuario
     guardar_mensaje(session_id, "user", mensaje)
 
-    # 3. Construir mensajes para Claude
     mensajes_claude = []
     for h in historial:
         if h.get("rol") in ("user", "assistant"):
@@ -153,7 +197,6 @@ def chat():
             })
     mensajes_claude.append({"role": "user", "content": mensaje})
 
-    # 4. Llamar a Claude
     try:
         resp = cliente_ai.messages.create(
             model="claude-sonnet-4-20250514",
@@ -163,36 +206,29 @@ def chat():
         )
         texto_resp = resp.content[0].text
     except Exception as e:
-        print(f"❌ Claude: {e}")
+        print(f"❌ Claude KIRA: {e}")
         return jsonify({
             "respuesta":       "Estoy teniendo un problema técnico momentáneo. Por favor intenta de nuevo en unos segundos.",
             "reporte_enviado": False
         })
 
-    # 5. Detectar email y disparar reporte
     reporte_enviado  = False
     email_detectado  = extraer_email(mensaje)
 
     if email_detectado and not reporte_ya_enviado(session_id):
         print(f"📧 Email: {email_detectado} | Sesión: {session_id}")
-
         historial_completo = historial + [
             {"rol": "user",      "mensaje": mensaje},
             {"rol": "assistant", "mensaje": texto_resp}
         ]
-
-        # Convertir al formato que espera generador_reporte_v2.py
         historial_formato_reporte = [
             {"role": h["rol"], "content": h["mensaje"]}
             for h in historial_completo
         ]
-
         def enviar_bg():
             generar_y_enviar_reporte(historial_formato_reporte, email_detectado)
-
         threading.Thread(target=enviar_bg, daemon=True).start()
         reporte_enviado = True
-
         guardar_mensaje(session_id, "assistant", texto_resp,
                         email=email_detectado, reporte_enviado=True)
     else:
@@ -204,11 +240,39 @@ def chat():
     })
 
 
+# ── Ruta CHIKI ────────────────────────────────────────────────
+
+@app.route("/chiki", methods=["POST"])
+def chiki():
+    try:
+        data = request.get_json(silent=True) or {}
+        messages = data.get("messages", [])
+
+        if not messages:
+            return jsonify({"error": "No messages provided"}), 400
+
+        resp = cliente_ai.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=600,
+            system=CHIKI_SYSTEM_PROMPT,
+            messages=messages
+        )
+        reply = resp.content[0].text
+        return jsonify({"reply": reply})
+
+    except Exception as e:
+        print(f"❌ Claude Chiki: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
 # ── Health check ──────────────────────────────────────────────
 
 @app.route("/health", methods=["GET"])
 def health():
-    return jsonify({"status": "ok", "service": "KIRA · SARD TECH", "version": "2.0"})
+    return jsonify({
+        "status":   "ok",
+        "services": ["KIRA · SARD TECH v2.0", "Chiki · La Chiquita v1.0"]
+    })
 
 
 # ── Arranque ──────────────────────────────────────────────────
